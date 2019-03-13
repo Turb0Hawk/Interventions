@@ -37,7 +37,7 @@ describe('ProblemeComponent', () => {
     let prenom = component.problemeForm.controls['prenom'];
     prenom.setValue('a'.repeat(2));
     errors = prenom.errors || {};
-    expect(errors['minLength']).toBeTruthy;
+    expect(errors['minlength']).toBeTruthy();
   });
 
   it('champ PRÉNOM doit contenir 200 charactères ou moins', () =>{
