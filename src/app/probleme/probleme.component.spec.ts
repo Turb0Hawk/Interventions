@@ -28,37 +28,21 @@ describe('ProblemeComponent', () => {
 
   it('champ PRÉNOM doit contenir plus de 2 charactères', () =>{
     let prenom = component.problemeForm.controls['prenom'];
-    prenom.setValue('a'.repeat(2));
-    expect(prenom.valid).toBe(false);
-  });
-
-  it('champ PRÉNOM doit contenir plus de 2 charactères', () =>{
-    let prenom = component.problemeForm.controls['prenom'];
     prenom.setValue('a'.repeat(3));
     expect(prenom.valid).toBe(true);
   });
 
-  it('champ PRÉNOM doit contenir plus de 2 charactères', () =>{
+  it('champ PRÉNOM est invalide avec 2 charcatères ', () =>{
+    let errors = {};
+    let prenom = component.problemeForm.controls['prenom'];
+    prenom.setValue('a'.repeat(2));
+    errors = prenom.errors || {};
+    expect(errors['minLength']).toBeTruthy;
+  });
+
+  it('champ PRÉNOM doit contenir 200 charactères ou moins', () =>{
     let prenom = component.problemeForm.controls['prenom'];
     prenom.setValue('a'.repeat(200));
     expect(prenom.valid).toBe(true);
-  });
-
-  it('champ PRÉNOM doit contenir plus de 2 charactères', () =>{
-    let prenom = component.problemeForm.controls['prenom'];
-    prenom.setValue('a'.repeat(2));
-    expect(prenom.valid).toBeFalsy();
-  });
-
-  it('champ PRÉNOM doit contenir plus de 2 charactères', () =>{
-    let prenom = component.problemeForm.controls['prenom'];
-    prenom.setValue('a'.repeat(2));
-    expect(prenom.valid).toBeFalsy();
-  });
-
-  it('champ PRÉNOM doit contenir plus de 2 charactères', () =>{
-    let prenom = component.problemeForm.controls['prenom'];
-    prenom.setValue('a'.repeat(2));
-    expect(prenom.valid).toBeFalsy();
   });
 });
