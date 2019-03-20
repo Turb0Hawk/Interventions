@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { longueurMinimum } from '../shared/longueur-minimum/longueur-minimum.component';
 
 @Component({
   selector: 'inter-probleme',

@@ -28,6 +28,20 @@
                   problemeForm.get('prenom').dirty) &&
                   (!problemeForm.get('prenom').valid )}"
                 />
+                <span class ="form-text" *ngIf="(problemeForm.get('prenom').touched ||
+                        problemeForm.get('prenom').dirty) &&
+                        problemeForm.get('prenom').errors">
+                  <span *ngIf="problemeForm.get('prenom').errors['minlength']">
+                    <small class="text-muted">
+                        Indiquer au moins 3 caractères.
+                    </small>
+                  </span>
+                  <span *ngIf="problemeForm.get('prenom').errors['required']">
+                      <small class="text-muted">
+                          Le champ ne peut pas être vide.
+                      </small>
+                  </span>
+                </span>
               </div>
             </div>
             <!--<div class="form-group row">
