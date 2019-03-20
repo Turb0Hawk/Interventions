@@ -26,13 +26,13 @@ describe('ProblemeComponent', () => {
   //   expect(component).toBeTruthy();
   // });
 
-  it('champ PRÉNOM doit contenir plus de 2 charactères', () => {
+  it('champ  PRÉNOM valide avec 3 caractères', () => {
     let prenom = component.problemeForm.controls['prenom'];
     prenom.setValue('a'.repeat(3));
     expect(prenom.valid).toBe(true);
   });
 
-  it('champ PRÉNOM est invalide avec 2 charcatères ', () => {
+  it('Champ PRÉNOM invalide avec 2 caractères ', () => {
     let errors = {};
     let prenom = component.problemeForm.controls['prenom'];
     prenom.setValue('a'.repeat(2));
@@ -40,16 +40,28 @@ describe('ProblemeComponent', () => {
     expect(errors['minlength']).toBeTruthy();
   });
 
-  it('champ PRÉNOM doit contenir 200 charactères ou moins', () => {
+  it('Champ PRÉNOM valide avec 200 caractères', () => {
     let prenom = component.problemeForm.controls['prenom'];
     prenom.setValue('a'.repeat(200));
     expect(prenom.valid).toBe(true);
   });
 
-  it('champ PRÉNOM ne peut pas être vide', () => {
+  it('Champ  PRÉNOM invalide avec aucune valeur', () => {
     let errors = {};
     let prenom = component.problemeForm.controls['prenom'];
     errors = prenom.errors || {};
     expect(errors['required']).toBe(true);
   });
+
+  it('Champ PRÉNOM valide avec 10 espaces', () => {
+    let prenom = component.problemeForm.controls['prenom'];
+    prenom.setValue(' '.repeat(10));
+    expect(prenom.valid).toBe(true);
+  });
+
+  it('Champ  PRÉNOM valide avec 2 espaces et 1 caractère ', () => {
+    let prenom = component.problemeForm.controls['prenom'];
+    prenom.setValue('  a');
+    expect(prenom.valid).toBe(true);
+  })
 });
