@@ -13,7 +13,7 @@ export class ProblemeComponent implements OnInit {
 
   ngOnInit() {
     this.problemeForm = this.formBuilder.group({
-      prenom : ['',[Validators.minLength(3), Validators.maxLength(200)]]
+      prenom : ['', [Validators.minLength(3), Validators.maxLength(200), Validators.required]]
     });
   }
 
