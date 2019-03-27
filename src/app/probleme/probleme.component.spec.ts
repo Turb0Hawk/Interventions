@@ -1,4 +1,4 @@
-import { longueurMinimum } from './../shared/longueur-minimum/longueur-minimum.component';
+import { LongueurMinimum } from './../shared/longueur-minimum/longueur-minimum.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -34,7 +34,7 @@ describe('ProblemeComponent', () => {
     let prenom = component.problemeForm.controls['prenom'];
     prenom.setValue('a'.repeat(2));
     errors = prenom.errors || {};
-    expect(errors['minlength']).toBeTruthy();
+    expect(errors['nbreCaracteresInsuffisants']).toBeTruthy();
   });
 
   it('Champ PRÉNOM valide avec 200 caractères', () => {
@@ -52,7 +52,7 @@ describe('ProblemeComponent', () => {
 
   it('Champ PRÉNOM invalide avec 10 espaces', () => {
     let prenom = component.problemeForm.controls['prenom'];
-    let validator = longueurMinimum.valide(3);
+    let validator = LongueurMinimum.valide(3);
     let result = validator(prenom as AbstractControl);
     prenom.setValue(' '.repeat(10));
     expect(result['nbreCaracteresInsuffisants']).toBe(true);
@@ -60,7 +60,7 @@ describe('ProblemeComponent', () => {
 
   it('Champ  PRÉNOM invalide avec 2 espaces et 1 caractère ', () => {
     let prenom = component.problemeForm.controls['prenom'];
-    let validator = longueurMinimum.valide(3);
+    let validator = LongueurMinimum.valide(3);
     let result = validator(prenom as AbstractControl);
     prenom.setValue('  a');
     expect(result['nbreCaracteresInsuffisants']).toBe(true);
