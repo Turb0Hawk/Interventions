@@ -1,43 +1,42 @@
 import {ITypeProbleme} from './typeProbleme';
 import {InMemoryDbService, InMemoryBackendConfig} from 'angular-in-memory-web-api';
 
-export class ProblemeData implements InMemoryDbService, InMemoryBackendConfig {
+export class typeProblemeData implements InMemoryDbService, InMemoryBackendConfig {
   createDb() {
-    let typesProbleme: ITypeProbleme[] = [
+    const typesProbleme: ITypeProbleme[] = [
       {
-        'id': 1,
-        'descriptionTypeProbleme': 'Problème avec la souris'
+        id: 1,
+        descriptionTypeProbleme: 'Problème avec la souris'
       },
       {
-        'id': 2,
-        'descriptionTypeProbleme': 'Problème de clavier'
+        id: 2,
+        descriptionTypeProbleme: 'Problème de clavier'
       },
       {
-        'id': 3,
-        'descriptionTypeProbleme': 'Problème d\'accès Internet'
+        id: 3,
+        descriptionTypeProbleme: 'Problème d\'accès Internet'
       },
       {
-        'id': 4,
-        'descriptionTypeProbleme': 'Problème avec un logiciel'
+        id: 4,
+        descriptionTypeProbleme: 'Problème avec un logiciel'
       },
       {
-        'id': 5,
-        'descriptionTypeProbleme': 'Problème d\'imprimante'
+        id: 5,
+        descriptionTypeProbleme: 'Problème d\'imprimante'
       },
       {
-        'id': 6,
-        'descriptionTypeProbleme': 'Carte graphique'
+        id: 6,
+        descriptionTypeProbleme: 'Carte graphique'
       },
       {
-        'id': 7,
-        'descriptionTypeProbleme': 'Carte mère'
+        id: 7,
+        descriptionTypeProbleme: 'Carte mère'
       },
       {
-        'id': 8,
-        'descriptionTypeProbleme': 'Autre'
+        id: 8,
+        descriptionTypeProbleme: 'Autre'
       }
     ];
-    // return { probleme, typesProbleme};
     return {typesprobleme: typesProbleme};
   }
 }

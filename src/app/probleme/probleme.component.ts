@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {validateurLongueur} from '../shared/validateurLongueur/validateurLongueur';
-import { TypeProblemeService } from './type-probleme.service';
-import { ITypeProbleme } from './typeProbleme';
+import {TypeProblemeService} from './type-probleme.service';
+import {ITypeProbleme} from './typeProbleme';
+
 
 @Component({
   selector: 'inter-probleme',
@@ -11,10 +12,11 @@ import { ITypeProbleme } from './typeProbleme';
 })
 export class ProblemeComponent implements OnInit {
   problemeForm: FormGroup;
-  typesProblemes: ITypeProbleme[];
-  errorMessage: string;
 
-  constructor(private formBuilder: FormBuilder, private types: TypeProblemeService ) { }
+  errorMessage: string;
+  private typesDeProblemes: ITypeProbleme[];
+
+  constructor(private formBuilder: FormBuilder, private typesProblemes: TypeProblemeService) { }
 
   ngOnInit() {
     this.problemeForm = this.formBuilder.group({
@@ -23,8 +25,8 @@ export class ProblemeComponent implements OnInit {
       typeProbleme: ['', Validators.required ]
     });
 
-    this.types.obtenirTypesProbleme()
-      .subscribe(cat => this.typesProblemes = cat,
-        error => this.errorMessage = <any> error);
+    this.typesProblemes.obtenirTypesProbleme()
+      .subscribe(cat => this.typesDeProblemes = cat,
+          error => this.errorMessage = <any> error);
   }
 }

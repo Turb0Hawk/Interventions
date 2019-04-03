@@ -64,5 +64,5 @@ describe('ProblemeComponent', () => {
     let result = validator(prenom as AbstractControl);
     prenom.setValue('  a');
     expect(result['nbreCaracteresInsuffisants']).toBe(true);
-  })
+  });
 });
