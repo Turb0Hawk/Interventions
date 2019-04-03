@@ -4,6 +4,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProblemeComponent } from './probleme.component';
 import { ReactiveFormsModule, AbstractControl } from '@angular/forms';
+import {TypeProblemeService} from './type-probleme.service';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('ProblemeComponent', () => {
   let component: ProblemeComponent;
@@ -11,8 +13,9 @@ describe('ProblemeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, AngularFontAwesomeModule],
-      declarations: [ ProblemeComponent ]
+      imports: [ReactiveFormsModule, AngularFontAwesomeModule, HttpClientModule],
+      declarations: [ ProblemeComponent ],
+      providers: [TypeProblemeService]
     })
     .compileComponents();
   }));
@@ -64,5 +67,29 @@ describe('ProblemeComponent', () => {
     let result = validator(prenom as AbstractControl);
     prenom.setValue('  a');
     expect(result['nbreCaracteresInsuffisants']).toBe(true);
+  });
+
+  it('Zone TELEPHONE est désactivée quand ne pas me notifier', () => {
+    component.appliquerNotifications('NePasMeNotifier');
+    let zone = component.problemeForm.controls['telephone'];
+    expect( zone.status ).toEqual('DISABLED');
+  });
+
+  it('Zone TELEPHONE est vide quand ne pas me notifier', () => {
+    component.appliquerNotifications('NePasMeNotifier');
+    let zone = component.problemeForm.controls['telephone'];
+    expect( zone.value ).toEqual('');
+  });
+
+  it('Zone ADRESSE COURRIEL est désactivée quand ne pas me notifier', () => {
+    component.appliquerNotifications('NePasMeNotifier');
+    let zone = component.problemeForm.get('courrielsGroup.courriel');
+    expect( zone.status ).toEqual('DISABLED');
+  });
+
+  it(' Zone CONFIRMER COURRIEL est désactivée quand ne pas me notifier', () => {
+    component.appliquerNotifications('NePasMeNotifier');
+    let zone = component.problemeForm.get('courrielsGroup.courrielConfirmation');
+    expect( zone.status ).toEqual('DISABLED');
   });
 });
