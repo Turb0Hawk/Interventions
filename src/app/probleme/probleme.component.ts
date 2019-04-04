@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {validateurLongueur} from '../shared/validateurLongueur/validateurLongueur';
 import {TypeProblemeService} from './type-probleme.service';
 import {ITypeProbleme} from './typeProbleme';
+import {emailMatcherValidator} from '../shared/email-matcher/email-matcher';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class ProblemeComponent implements OnInit {
   appliquerNotifications(typeNotification: string): void {
     const courrielControl = this.problemeForm.get('courrielsGroup.courriel');
     const courrielConfirmationControl = this.problemeForm.get('courrielsGroup.courrielConfirmation');
+    const courrielGroupControl = this.problemeForm.controls['courrielsGroup'];
     const telephoneControl = this.problemeForm.controls['telephone'];
 
     // Tous remettre à zéro
@@ -50,11 +52,16 @@ export class ProblemeComponent implements OnInit {
     courrielConfirmationControl.reset();
     courrielConfirmationControl.disable();
 
+    courrielGroupControl.clearValidators();
+    courrielGroupControl.reset();
+    courrielGroupControl.disable();
+
     if (typeNotification === 'ParCourriel') {
-      courrielControl.setValidators([Validators.required]);
+      courrielControl.setValidators([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+' )]);
       courrielControl.enable();
       courrielConfirmationControl.setValidators([Validators.required]);
       courrielConfirmationControl.enable();
+      courrielGroupControl.setValidators(emailMatcherValidator.courrielDifferents());
       // Si le validateur est dans un autre fichier l'écire sous la forme suivante :
       // ...Validators.compose([classeDuValidateur.NomDeLaMethode()])])
       // courrielsGroupControl.setValidators([Validators.compose([datesValides])]);
@@ -67,5 +74,6 @@ export class ProblemeComponent implements OnInit {
     }
     courrielControl.updateValueAndValidity();
     courrielConfirmationControl.updateValueAndValidity();
+    courrielGroupControl.updateValueAndValidity();
   }
 }

@@ -161,7 +161,7 @@ describe('ProblemeComponent', () => {
     courriel.setValue('test1@mail.com');
     courrielConfirmation.setValue('test2@mail.com');
     errors = group.errors;
-    expect(errors['match']).toBe(true)
+    expect(errors['match']).toBe(true);
   });
 
   it(' Zones ADRESSE COURRIEL et CONFIRMER COURRIEL sont valides si les valeurs sont identiques quand notifier par courriel', () => {
