@@ -175,4 +175,16 @@ describe('ProblemeComponent', () => {
     errors = group.errors;
     expect(errors).toBeNull();
   });
+
+  it('Zone TELEPHONE est activée quand notifier par messagerie texte', () => {
+    component.appliquerNotifications('ParMessageTexte');
+    let zone = component.problemeForm.controls['telephone'];
+    expect( zone.enabled ).toBe(true);
+  });
+
+  it('Zone TELEPHONE est activée quand notifier par messagerie texte', () => {
+    component.appliquerNotifications('ParMessageTexte');
+    let zone = component.problemeForm.controls['telephone'];
+    expect( zone.enabled ).toBe(true);
+  });
 });
