@@ -62,11 +62,9 @@ export class ProblemeComponent implements OnInit {
       courrielConfirmationControl.setValidators([Validators.required]);
       courrielConfirmationControl.enable();
       courrielGroupControl.setValidators(emailMatcherValidator.courrielDifferents());
-      // Si le validateur est dans un autre fichier l'écire sous la forme suivante :
-      // ...Validators.compose([classeDuValidateur.NomDeLaMethode()])])
-      // courrielsGroupControl.setValidators([Validators.compose([datesValides])]);
+
     } else if (typeNotification === 'ParMessageTexte') {
-      telephoneControl.setValidators([Validators.required]);
+      telephoneControl.setValidators([Validators.required, Validators.pattern('[0-9]+' ), Validators.minLength(10),  Validators.maxLength(10)]);
       telephoneControl.enable();
     } else if (typeNotification === 'NePasMeNotifier') {
         courrielControl.setValidators([Validators.required]);
