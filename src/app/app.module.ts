@@ -9,7 +9,6 @@ import { AcceuilComponent } from './acceuil/acceuil.component';
 import { ProblemeComponent } from './probleme/probleme.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {typeProblemeData} from './probleme/typeProbleme-data';
 
 
@@ -26,7 +25,6 @@ import {typeProblemeData} from './probleme/typeProbleme-data';
     AngularFontAwesomeModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule .forRoot(typeProblemeData, {delay: 1000})
   ],
   providers: [],
   bootstrap: [AppComponent]

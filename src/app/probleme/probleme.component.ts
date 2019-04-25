@@ -4,6 +4,8 @@ import {validateurLongueur} from '../shared/validateurLongueur/validateurLongueu
 import {TypeProblemeService} from './type-probleme.service';
 import {ITypeProbleme} from './typeProbleme';
 import {emailMatcherValidator} from '../shared/email-matcher/email-matcher';
+import {IProbleme} from './probleme';
+import {ProblemeService} from './probleme.service';
 
 
 @Component({
@@ -17,7 +19,11 @@ export class ProblemeComponent implements OnInit {
   errorMessage: string;
   private typesDeProblemes: ITypeProbleme[];
 
-  constructor(private formBuilder: FormBuilder, private typesProblemes: TypeProblemeService) { }
+  probleme: IProbleme;
+  messageSauvegarde: string;
+
+
+  constructor(private formBuilder: FormBuilder, private typesProblemes: TypeProblemeService, private problemeService: ProblemeService) { }
 
   ngOnInit() {
     this.problemeForm = this.formBuilder.group({
@@ -84,5 +90,24 @@ export class ProblemeComponent implements OnInit {
     courrielControl.updateValueAndValidity();
     courrielConfirmationControl.updateValueAndValidity();
     courrielGroupControl.updateValueAndValidity();
+  }
+
+  save(): void {
+    if (this.problemeForm.dirty && this.problemeForm.valid) {
+      this.probleme = this.problemeForm.value;
+      // Affecter les valeurs qui proviennent du fg le plus interne.
+      this.probleme.courriel =  this.problemeForm.get('courrielsGroup.courriel').value;
+      this.probleme.courrielConfirmation =  this.problemeForm.get('courrielsGroup.courrielConfirmation').value;
+      this.problemeService.saveProbleme(this.probleme)
+        .subscribe( // on s'abonne car on a un retour du serveur à un moment donné avec la callback fonction
+          () => this.onSaveComplete(),  // Fonction callback
+          (error: any) => this.errorMessage = <any> error
+        );
+    }
+  }
+
+  onSaveComplete(): void {
+    this.problemeForm.reset();  // Pour remettre Dirty à false.  Autrement le Route Guard va dire que le formulaire n'est pas sauvegardé
+    this.messageSauvegarde = 'Votre problème a bien été sauvegardée.  Nous vous remercions.';
   }
 }

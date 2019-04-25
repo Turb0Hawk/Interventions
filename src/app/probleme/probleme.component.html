@@ -7,6 +7,9 @@
       <!-- L'en-tête ici -->
     </div>
     <div class="card-body">
+      <div class="alert alert-info" role="alert" *ngIf="messageSauvegarde">
+        {{messageSauvegarde}}
+      </div>
       <h5 class="card-title">Veuillez renseigner les zones suivantese et soumettre votre demande</h5>
       <div class="card-text">
         <form class="form-horizontal"
