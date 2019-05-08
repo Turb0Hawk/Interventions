@@ -98,6 +98,7 @@ export class ProblemeComponent implements OnInit {
       // Affecter les valeurs qui proviennent du fg le plus interne.
       this.probleme.courriel =  this.problemeForm.get('courrielsGroup.courriel').value;
       this.probleme.courrielConfirmation =  this.problemeForm.get('courrielsGroup.courrielConfirmation').value;
+      this.probleme.dateProbleme = new Date();
       this.problemeService.saveProbleme(this.probleme)
         .subscribe( // on s'abonne car on a un retour du serveur à un moment donné avec la callback fonction
           () => this.onSaveComplete(),  // Fonction callback
